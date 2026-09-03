@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pune Student Mess Finder</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<nav>
+    <div class="logo">🍱 Pune Student Mess Finder</div>
+
+   <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="contact.html">Contact</a></li>
+</ul>
+</nav>
+
+<section>
+
+<h2>Popular Messes Near Colleges</h2>
+
+<div class="search-box">
+    <input type="text" id="searchInput" placeholder="Search Mess Name..." onkeyup="searchMess()">
+</div>
+
+<div class="filter-buttons">
+    <button onclick="filterMess('all')">All</button>
+    <button onclick="filterMess('veg')">🟢 Veg</button>
+    <button onclick="filterMess('nonveg')">🔴 Non-Veg</button>
+</div>
+
+<div class="college-container">
+
+    <!-- Patil Mess -->
+
+    <div class="college-card veg-card">
+
+        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600" alt="Food">
+
+        <h3>Patil Mess</h3>
+
+        <span class="veg">🟢 Veg</span>
+
+        <p>📍 Akurdi, Pune</p>
+        <p>₹3000 / Month</p>
+        <p>⭐ 4.5 Rating</p>
+
+        <h4>Today's Special</h4>
+
+        <p>
+            Paneer Butter Masala<br>
+            Jeera Rice<br>
+            Chapati<br>
+            Gulab Jamun
+        </p>
+
+        <button onclick="patilMenu()">📋 Weekly Menu</button>
+
+        <br><br>
+
+        <a href="https://maps.app.goo.gl/KU2DND6kNNtxrPSA6" target="_blank" class="btn">
+            📍 Real Location
+        </a>
+
+        <a href="https://wa.me/919999999999" target="_blank" class="btn">
+            💬 WhatsApp
+        </a>
+
+    </div>
+
+    <!-- Hotel Morya -->
+
+    <div class="college-card veg-card">
+
+        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600" alt="Food">
+
+        <h3>Hotel Morya & Mess</h3>
+
+        <span class="veg">🟢 Pure Veg</span>
+
+        <p>📍 Akurdi, Pune</p>
+        <p>₹3200 / Month</p>
+        <p>⭐ 4.7 Rating</p>
+
+        <h4>Today's Special</h4>
+
+        <p>
+            Veg Kolhapuri<br>
+            Jeera Rice<br>
+            Chapati<br>
+            Sweet Dish
+        </p>
+
+        <button onclick="moryaMenu()">📋 Weekly Menu</button>
+
+        <br><br>
+
+        <a href="https://maps.app.goo.gl/BhQJk2ZmMRzEkMUR7" target="_blank" class="btn">
+            📍 Real Location
+        </a>
+
+        <a href="https://wa.me/919999999999" target="_blank" class="btn">
+            💬 WhatsApp
+        </a>
+
+    </div>
+
+    <!-- Vaishnavi Mess -->
+
+    <div class="college-card nonveg-card">
+
+        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600" alt="Food">
+
+        <h3>Vaishnavi Mess</h3>
+
+        <span class="nonveg">🔴 Veg & Non-Veg</span>
+
+        <p>📍 Pune</p>
+        <p>₹3500 / Month</p>
+        <p>⭐ 4.6 Rating</p>
+
+        <h4>Today's Special</h4>
+
+        <p>
+            Chicken Curry<br>
+            Rice<br>
+            Chapati<br>
+            Salad
+        </p>
+
+        <button onclick="vaishnaviMenu()">📋 Weekly Menu</button>
+
+        <br><br>
+
+        <a href="https://maps.app.goo.gl/U9JXjHAvBPNpMmaS8" target="_blank" class="btn">
+            📍 Real Location
+        </a>
+
+        <a href="https://wa.me/919999999999" target="_blank" class="btn">
+            💬 WhatsApp
+        </a>
+
+    </div>
+
+</div>
+
+</section>
+
+<footer>
+    <p>© 2026 Pune Student Mess Finder</p>
+</footer>
+
+<script>
+
+function patilMenu(){
+alert(
+"PATIL MESS MENU\n\n"+
+"Monday - Dal Rice\n"+
+"Tuesday - Paneer Masala\n"+
+"Wednesday - Mix Veg\n"+
+"Thursday - Chole Bhature\n"+
+"Friday - Veg Pulao\n"+
+"Saturday - Pav Bhaji\n"+
+"Sunday - Special Veg Thali"
+);
+}
+
+function moryaMenu(){
+alert(
+"MORYA MESS MENU\n\n"+
+"Monday - Aloo Sabji\n"+
+"Tuesday - Paneer Butter Masala\n"+
+"Wednesday - Veg Kolhapuri\n"+
+"Thursday - Puri Bhaji\n"+
+"Friday - Jeera Rice\n"+
+"Saturday - Misal Pav\n"+
+"Sunday - Special Maharashtrian Thali"
+);
+}
+
+function vaishnaviMenu(){
+alert(
+"VAISHNAVI MESS MENU\n\n"+
+"Monday - Chicken Curry\n"+
+"Tuesday - Egg Curry\n"+
+"Wednesday - Chicken Biryani\n"+
+"Thursday - Fish Curry\n"+
+"Friday - Chicken Masala\n"+
+"Saturday - Egg Biryani\n"+
+"Sunday - Special Chicken Thali"
+);
+}
+
+function searchMess() {
+    let input = document.getElementById("searchInput").value.toLowerCase();
+    let cards = document.getElementsByClassName("college-card");
+
+    for (let i = 0; i < cards.length; i++) {
+        let title = cards[i].getElementsByTagName("h3")[0].innerText.toLowerCase();
+
+        if (title.includes(input)) {
+            cards[i].style.display = "block";
+        } else {
+            cards[i].style.display = "none";
+        }
+    }
+}
+
+function filterMess(type){
+
+    let vegCards = document.querySelectorAll(".veg-card");
+    let nonvegCards = document.querySelectorAll(".nonveg-card");
+
+    if(type==="all"){
+        document.querySelectorAll(".college-card").forEach(card=>{
+            card.style.display="block";
+        });
+    }
+
+    if(type==="veg"){
+        vegCards.forEach(card=>card.style.display="block");
+        nonvegCards.forEach(card=>card.style.display="none");
+    }
+
+    if(type==="nonveg"){
+        vegCards.forEach(card=>card.style.display="none");
+        nonvegCards.forEach(card=>card.style.display="block");
+    }
+}
+
+</script>
+
+</body>
+</html>

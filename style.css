@@ -1,0 +1,207 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#0f172a,#1e293b,#334155);
+    color:white;
+}
+
+/* Navbar */
+nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 8%;
+    background:rgba(255,255,255,0.1);
+    backdrop-filter:blur(10px);
+    position:sticky;
+    top:0;
+}
+
+.logo{
+    font-size:24px;
+    font-weight:bold;
+}
+
+nav ul{
+    display:flex;
+    list-style:none;
+}
+
+nav ul li{
+    margin-left:25px;
+}
+
+nav ul li a{
+    text-decoration:none;
+    color:white;
+    font-weight:500;
+}
+
+nav ul li a:hover{
+    color:#38bdf8;
+}
+
+/* Hero Section */
+.hero{
+    height:90vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:20px;
+}
+
+.hero h1{
+    font-size:55px;
+    margin-bottom:20px;
+}
+
+.hero p{
+    font-size:20px;
+    max-width:700px;
+    margin-bottom:30px;
+}
+
+/* Button */
+.btn{
+    background:#38bdf8;
+    color:white;
+    text-decoration:none;
+    padding:14px 30px;
+    border-radius:30px;
+    display:inline-block;
+}
+
+.btn:hover{
+    background:#0ea5e9;
+}
+
+/* Sections */
+section{
+    padding:80px 8%;
+}
+
+section h2{
+    text-align:center;
+    margin-bottom:40px;
+    font-size:38px;
+}
+
+/* Cards */
+.college-container{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:30px;
+}
+
+.college-card{
+    background:rgba(255,255,255,0.1);
+    border-radius:20px;
+    padding:30px;
+    text-align:center;
+    backdrop-filter:blur(12px);
+    border:1px solid rgba(255,255,255,0.2);
+}
+
+.college-card:hover{
+    transform:translateY(-10px);
+    transition:0.3s;
+}
+
+.college-card h3{
+    margin-bottom:15px;
+}
+
+.college-card p{
+    margin-bottom:15px;
+}
+
+/* Images */
+img{
+    width:100%;
+    height:200px;
+    object-fit:cover;
+    border-radius:15px;
+    margin-bottom:15px;
+}
+
+/* Veg Badge */
+.veg{
+    background:#16a34a;
+    padding:6px 12px;
+    border-radius:20px;
+    display:inline-block;
+    margin-bottom:10px;
+}
+
+/* Non Veg Badge */
+.nonveg{
+    background:#dc2626;
+    padding:6px 12px;
+    border-radius:20px;
+    display:inline-block;
+    margin-bottom:10px;
+}
+
+/* Search */
+.search-box{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.search-box input{
+    width:80%;
+    max-width:500px;
+    padding:15px;
+    border:none;
+    border-radius:30px;
+}
+
+/* Filter Buttons */
+.filter-buttons{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.filter-buttons button{
+    padding:10px 20px;
+    margin:5px;
+    border:none;
+    border-radius:20px;
+    cursor:pointer;
+}
+
+/* Footer */
+footer{
+    text-align:center;
+    padding:25px;
+    background:rgba(255,255,255,0.08);
+}
+
+/* Mobile */
+@media(max-width:768px){
+
+    nav{
+        flex-direction:column;
+    }
+
+    nav ul{
+        margin-top:15px;
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+
+    .hero h1{
+        font-size:38px;
+    }
+
+    .hero p{
+        font-size:16px;
+    }
+}
