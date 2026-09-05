@@ -14,16 +14,23 @@
     <div class="logo">🍱 Pune Student Mess Finder</div>
 
     <ul>
-    <li><a href="#">Home</a></li>
-    <li><a href="#colleges">Colleges</a></li>
-    <li><a href="#messes">Messes</a></li>
-    <li><a href="contact.html">Contact</a></li>
-    <li><a href="login.html">Admin</a></li>
-</ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#colleges">Colleges</a></li>
+        <li><a href="#messes">Messes</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="login.html">Admin</a></li>
+    </ul>
+
+     <button id="themeBtn" onclick="toggleTheme()">
+        🌙 Dark Mode
+    </button>
 </nav>
 
 <!-- Hero Section -->
 <section class="hero">
+
+    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1200"
+    class="hero-img" alt="Food">
 
     <h1>Find the Best Mess Near Your College</h1>
 
@@ -84,21 +91,81 @@
     <div class="college-container">
 
         <div class="college-card">
-            <h3>Sai Mess</h3>
+            <h3>Patil Mess</h3>
             <p>₹3000 / Month</p>
             <p>⭐ 4.5 Rating</p>
         </div>
 
         <div class="college-card">
-            <h3>Annapurna Mess</h3>
+            <h3>Hotel Morya & Mess</h3>
             <p>₹3200 / Month</p>
             <p>⭐ 4.7 Rating</p>
         </div>
 
         <div class="college-card">
-            <h3>Morya Mess</h3>
-            <p>₹2800 / Month</p>
-            <p>⭐ 4.3 Rating</p>
+            <h3>Vaishnavi Mess</h3>
+            <p>₹3500 / Month</p>
+            <p>⭐ 4.6 Rating</p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- About Section -->
+<section id="about">
+
+    <h2>About Us</h2>
+
+    <div class="college-card">
+
+        <p>
+            Pune Student Mess Finder helps students find affordable,
+            hygienic and nearby mess facilities around colleges in Pune.
+        </p>
+
+        <br>
+
+        <p>
+            Students can view mess menus, pricing,
+            locations and WhatsApp contacts in one place.
+        </p>
+
+    </div>
+
+</section>
+
+<!-- Testimonials -->
+<section id="testimonials">
+
+    <h2>Student Reviews</h2>
+
+    <div class="college-container">
+
+        <div class="college-card">
+            <h3>Rahul</h3>
+            <p>⭐⭐⭐⭐⭐</p>
+            <p>
+                Found a great mess near PCCOE.
+                Very useful website.
+            </p>
+        </div>
+
+        <div class="college-card">
+            <h3>Priya</h3>
+            <p>⭐⭐⭐⭐⭐</p>
+            <p>
+                Easy to find veg messes and
+                contact owners directly.
+            </p>
+        </div>
+
+        <div class="college-card">
+            <h3>Amit</h3>
+            <p>⭐⭐⭐⭐</p>
+            <p>
+                Weekly menu feature is very helpful.
+            </p>
         </div>
 
     </div>
@@ -106,9 +173,61 @@
 </section>
 
 <!-- Footer -->
-<footer id="contact">
+<footer>
+
+    <h3>🍱 Pune Student Mess Finder</h3>
+
+    <p>
+        Helping students find affordable and hygienic messes.
+    </p>
+
+    <br>
+
+    <p>📧 punemessfinder@gmail.com</p>
+    <p>📞 +91 9876543210</p>
+    <p>📍 Pune, Maharashtra</p>
+
+    <br>
+
     <p>© 2026 Pune Student Mess Finder</p>
+
 </footer>
+</footer>
+
+<script>
+
+function toggleTheme(){
+
+    document.body.classList.toggle("light-mode");
+
+    let btn = document.getElementById("themeBtn");
+
+    if(document.body.classList.contains("light-mode")){
+        localStorage.setItem("theme","light");
+        btn.innerHTML="☀️ Light Mode";
+    }else{
+        localStorage.setItem("theme","dark");
+        btn.innerHTML="🌙 Dark Mode";
+    }
+}
+
+window.onload = function(){
+
+    let savedTheme = localStorage.getItem("theme");
+
+    if(savedTheme==="light"){
+
+        document.body.classList.add("light-mode");
+
+        let btn = document.getElementById("themeBtn");
+
+        if(btn){
+            btn.innerHTML="☀️ Light Mode";
+        }
+    }
+}
+
+</script>
 
 </body>
 </html>

@@ -21,7 +21,11 @@
 <section>
 
 <h2>Popular Messes Near Colleges</h2>
+<button onclick="findLocation()" class="btn">
+📍 Find Messes Near Me
+</button>
 
+<p id="locationResult"></p>
 <div class="search-box">
     <input type="text" id="searchInput" placeholder="Search Mess Name..." onkeyup="searchMess()">
 </div>
@@ -41,13 +45,33 @@
         <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600" alt="Food">
 
         <h3>Patil Mess</h3>
+        <span class="favorite" onclick="toggleFavorite(this)">
+❤️
+</span>
 
         <span class="veg">🟢 Veg</span>
 
         <p>📍 Akurdi, Pune</p>
         <p>₹3000 / Month</p>
-        <p>⭐ 4.5 Rating</p>
+        <p>
+⭐ Original Rating: 4.5
+</p>
 
+<p>
+Your Rating:
+<span id="rating1">0</span>/5
+</p>
+
+<label>Your Rating:</label>
+
+<select onchange="rateMess('rating1', this.value)">
+    <option value="">Select</option>
+    <option value="1">⭐ 1</option>
+    <option value="2">⭐⭐ 2</option>
+    <option value="3">⭐⭐⭐ 3</option>
+    <option value="4">⭐⭐⭐⭐ 4</option>
+    <option value="5">⭐⭐⭐⭐⭐ 5</option>
+</select>
         <h4>Today's Special</h4>
 
         <p>
@@ -65,7 +89,7 @@
             📍 Real Location
         </a>
 
-        <a href="https://wa.me/919999999999" target="_blank" class="btn">
+        <a href="https://wa.me/919876543210" target="_blank" class="btn">
             💬 WhatsApp
         </a>
 
@@ -78,12 +102,41 @@
         <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600" alt="Food">
 
         <h3>Hotel Morya & Mess</h3>
+        <span class="favorite" onclick="toggleFavorite(this)">
+❤️
+</span>
 
         <span class="veg">🟢 Pure Veg</span>
 
         <p>📍 Akurdi, Pune</p>
         <p>₹3200 / Month</p>
-        <p>⭐ 4.7 Rating</p>
+        <h3>Patil Mess</h3>
+
+<span class="veg">🟢 Veg</span>
+
+<p>📍 Akurdi, Pune</p>
+<p>₹3000 / Month</p>
+
+<p>
+⭐ Original Rating: 4.7
+</p>
+
+<p>
+Your Rating:
+<span id="rating1">0</span>/5
+</p>
+
+<label>Your Rating:</label>
+
+<select onchange="rateMess('rating1', this.value)">
+    <option value="">Select</option>
+    <option value="1">⭐ 1</option>
+    <option value="2">⭐⭐ 2</option>
+    <option value="3">⭐⭐⭐ 3</option>
+    <option value="4">⭐⭐⭐⭐ 4</option>
+    <option value="5">⭐⭐⭐⭐⭐ 5</option>
+</select>
+<h4>Today's Special</h4>
 
         <h4>Today's Special</h4>
 
@@ -102,7 +155,7 @@
             📍 Real Location
         </a>
 
-        <a href="https://wa.me/919999999999" target="_blank" class="btn">
+        <a href="https://wa.me/919876543210" target="_blank" class="btn">
             💬 WhatsApp
         </a>
 
@@ -115,12 +168,42 @@
         <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600" alt="Food">
 
         <h3>Vaishnavi Mess</h3>
+        <span class="favorite" onclick="toggleFavorite(this)">
+❤️
+</span>
 
         <span class="nonveg">🔴 Veg & Non-Veg</span>
 
         <p>📍 Pune</p>
         <p>₹3500 / Month</p>
-        <p>⭐ 4.6 Rating</p>
+        <h3>Patil Mess</h3>
+
+<span class="veg">🟢 Veg</span>
+
+<p>📍 Akurdi, Pune</p>
+<p>₹3000 / Month</p>
+
+<p>
+⭐ Original Rating: 4.6
+</p>
+
+<p>
+Your Rating:
+<span id="rating1">0</span>/5
+</p>
+
+<label>Your Rating:</label>
+
+<select onchange="rateMess('rating1', this.value)">
+    <option value="">Select</option>
+    <option value="1">⭐ 1</option>
+    <option value="2">⭐⭐ 2</option>
+    <option value="3">⭐⭐⭐ 3</option>
+    <option value="4">⭐⭐⭐⭐ 4</option>
+    <option value="5">⭐⭐⭐⭐⭐ 5</option>
+</select>
+
+<h4>Today's Special</h4>
 
         <h4>Today's Special</h4>
 
@@ -139,7 +222,7 @@
             📍 Real Location
         </a>
 
-        <a href="https://wa.me/919999999999" target="_blank" class="btn">
+        <a href="https://wa.me/919876543210" target="_blank" class="btn">
             💬 WhatsApp
         </a>
 
@@ -194,19 +277,29 @@ alert(
 );
 }
 
-function searchMess() {
-    let input = document.getElementById("searchInput").value.toLowerCase();
-    let cards = document.getElementsByClassName("college-card");
+function searchMess(){
 
-    for (let i = 0; i < cards.length; i++) {
-        let title = cards[i].getElementsByTagName("h3")[0].innerText.toLowerCase();
+    let input =
+    document.getElementById("searchInput")
+    .value.toLowerCase();
 
-        if (title.includes(input)) {
-            cards[i].style.display = "block";
-        } else {
-            cards[i].style.display = "none";
+    let cards =
+    document.querySelectorAll(".college-card");
+
+    cards.forEach(card=>{
+
+        let text =
+        card.innerText.toLowerCase();
+
+        if(text.includes(input)){
+            card.style.display="block";
         }
-    }
+        else{
+            card.style.display="none";
+        }
+
+    });
+
 }
 
 function filterMess(type){
@@ -230,7 +323,100 @@ function filterMess(type){
         nonvegCards.forEach(card=>card.style.display="block");
     }
 }
+function toggleFavorite(element){
 
+    let messName =
+    element.parentElement.querySelector("h3").innerText;
+
+    if(element.innerHTML==="❤️"){
+
+        element.innerHTML="💖";
+
+        localStorage.setItem(
+            "fav_"+messName,
+            "yes"
+        );
+
+    }
+    else{
+
+        element.innerHTML="❤️";
+
+        localStorage.removeItem(
+            "fav_"+messName
+        );
+
+    }
+
+}
+
+window.addEventListener("load",function(){
+
+    document
+    .querySelectorAll(".college-card")
+    .forEach(card=>{
+
+        let messName =
+        card.querySelector("h3").innerText;
+
+        let fav =
+        localStorage.getItem(
+            "fav_"+messName
+        );
+
+        if(fav==="yes"){
+
+            card.querySelector(
+                ".favorite"
+            ).innerHTML="💖";
+
+        }
+
+    });
+
+});
+function findLocation(){
+
+    if(navigator.geolocation){
+
+        navigator.geolocation.getCurrentPosition(
+            showPosition,
+            showError
+        );
+
+    }else{
+
+        document.getElementById(
+            "locationResult"
+        ).innerHTML =
+        "Geolocation not supported.";
+
+    }
+
+}
+
+function showPosition(position){
+
+    document.getElementById(
+        "locationResult"
+    ).innerHTML =
+    "✅ Location Detected Successfully";
+
+    window.open(
+        "https://www.google.com/maps/search/mess+near+me",
+        "_blank"
+    );
+
+}
+
+function showError(){
+
+    document.getElementById(
+        "locationResult"
+    ).innerHTML =
+    "Location access denied.";
+
+}
 </script>
 
 </body>
