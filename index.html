@@ -18,12 +18,19 @@
         <li><a href="#colleges">Colleges</a></li>
         <li><a href="#messes">Messes</a></li>
         <li><a href="contact.html">Contact</a></li>
-        <li><a href="login.html">Admin</a></li>
+        <li><a href="messes.html">Find Mess</a></li>
+<li><a href="owner-login.html">Owner Login</a></li>
+<li><a href="login.html">Admin Login</a></li>
     </ul>
 
      <button id="themeBtn" onclick="toggleTheme()">
         🌙 Dark Mode
     </button>
+    <select id="language" onchange="changeLanguage()">
+    <option value="en">English</option>
+    <option value="mr">मराठी</option>
+    <option value="hi">हिन्दी</option>
+</select>
 </nav>
 
 <!-- Hero Section -->
@@ -40,8 +47,14 @@
     </p>
 
     <a href="#colleges" class="btn">
-        Explore Now
-    </a>
+    Explore Now
+</a>
+
+<br><br>
+
+<button onclick="findLocation()" class="btn">
+    📍 Find Mess Near Me
+</button>
 
 </section>
 
@@ -114,6 +127,16 @@
 
 <!-- About Section -->
 <section id="about">
+<section id="favorites">
+
+    <h2>❤️ Favorite Messes</h2>
+
+    <div id="favoriteList">
+        No favorites added yet
+    </div>
+
+</section>
+<section id="about">
 
     <h2>About Us</h2>
 
@@ -171,7 +194,47 @@
     </div>
 
 </section>
+<section id="suggestion">
 
+    <h2>💡 Suggestions</h2>
+
+    <textarea
+    id="suggestionText"
+    rows="4"
+    placeholder="Give your suggestions">
+    </textarea>
+
+    <br><br>
+
+    <button onclick="saveSuggestion()">
+        Submit Suggestion
+    </button>
+    </section>
+    
+<section>
+
+<h2>📊 Website Statistics</h2>
+
+<div class="college-container">
+
+<div class="college-card">
+<h3 id="totalMesses">0</h3>
+<p>Total Messes</p>
+</div>
+
+<div class="college-card">
+<h3 id="vegMesses">0</h3>
+<p>Veg</p>
+</div>
+
+<div class="college-card">
+<h3 id="nonVegMesses">0</h3>
+<p>Non Veg</p>
+</div>
+
+</div>
+
+</section>
 <!-- Footer -->
 <footer>
 
@@ -191,7 +254,7 @@
 
     <p>© 2026 Pune Student Mess Finder</p>
 
-</footer>
+
 </footer>
 
 <script>
@@ -225,8 +288,132 @@ window.onload = function(){
             btn.innerHTML="☀️ Light Mode";
         }
     }
+
+    loadStatistics();
+}
+function findLocation(){
+
+    if(navigator.geolocation){
+
+        navigator.geolocation.getCurrentPosition(
+        function(position){
+
+            localStorage.setItem(
+                "userLat",
+                position.coords.latitude
+            );
+
+            localStorage.setItem(
+                "userLng",
+                position.coords.longitude
+            );
+
+            window.location.href =
+            "messes.html";
+        });
+
+    }else{
+
+        alert("Location not supported");
+
+    }
+}
+function loadStatistics(){
+
+    let messes =
+    JSON.parse(
+    localStorage.getItem("messes")
+    ) || [];
+
+    document.getElementById(
+    "totalMesses"
+    ).innerText = messes.length;
+
+    let veg =
+    messes.filter(
+    mess =>
+    mess.type &&
+    mess.type.toLowerCase().includes("veg") &&
+    !mess.type.toLowerCase().includes("non")
+    ).length;
+
+    let nonVeg =
+    messes.filter(
+    mess =>
+    mess.type &&
+    mess.type.toLowerCase().includes("non")
+    ).length;
+
+    document.getElementById(
+    "vegMesses"
+    ).innerText = veg;
+
+    document.getElementById(
+    "nonVegMesses"
+    ).innerText = nonVeg;
+}
+function saveSuggestion(){
+
+    let suggestion =
+    document.getElementById(
+    "suggestionText"
+    ).value;
+
+    let suggestions =
+    JSON.parse(
+    localStorage.getItem(
+    "suggestions"
+    )) || [];
+
+    suggestions.push(suggestion);
+
+    localStorage.setItem(
+    "suggestions",
+    JSON.stringify(suggestions)
+    );
+
+    alert("Suggestion Submitted");
+
+    document.getElementById(
+    "suggestionText"
+    ).value="";
+}
+function changeLanguage(){
+
+let lang =
+document.getElementById("language").value;
+
+if(lang==="mr"){
+
+document.querySelector(".hero h1").innerText =
+"तुमच्या कॉलेजजवळील सर्वोत्तम मेस शोधा";
+
+document.querySelector(".hero p").innerText =
+"PCCOE, DY Patil आणि VIT Pune जवळील परवडणाऱ्या मेस शोधा";
+
 }
 
+else if(lang==="hi"){
+
+document.querySelector(".hero h1").innerText =
+"अपने कॉलेज के पास सबसे अच्छी मेस खोजें";
+
+document.querySelector(".hero p").innerText =
+"PCCOE, DY Patil और VIT Pune के पास सस्ती मेस खोजें";
+
+}
+
+else{
+
+document.querySelector(".hero h1").innerText =
+"Find the Best Mess Near Your College";
+
+document.querySelector(".hero p").innerText =
+"Search affordable and hygienic messes near PCCOE, DY Patil Akurdi and VIT Pune.";
+
+}
+
+}
 </script>
 
 </body>

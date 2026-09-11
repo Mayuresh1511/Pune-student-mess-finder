@@ -227,7 +227,7 @@ Your Rating:
         </a>
 
     </div>
-
+<div id="dynamicMesses"></div>
 </div>
 
 </section>
@@ -352,6 +352,7 @@ function toggleFavorite(element){
 
 window.addEventListener("load",function(){
 
+    loadOwnerMesses();
     document
     .querySelectorAll(".college-card")
     .forEach(card=>{
@@ -415,6 +416,62 @@ function showError(){
         "locationResult"
     ).innerHTML =
     "Location access denied.";
+
+}
+function loadOwnerMesses(){
+
+let messes =
+JSON.parse(localStorage.getItem("messes")) || [];
+
+let container =
+document.getElementById("dynamicMesses");
+
+if(!container) return;
+
+container.innerHTML = "";
+
+messes.forEach(mess=>{
+
+container.innerHTML += `
+
+<div class="college-card">
+
+<img src="${
+mess.photo ||
+'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600'
+}" alt="Mess Photo">
+
+<h3>${mess.name}</h3>
+
+<p>📍 ${mess.location}</p>
+
+<p>💰 ${mess.price}</p>
+
+<p>🍽 ${mess.type}</p>
+
+<p>📞 ${mess.contactNumber || "Not Available"}</p>
+
+<p>🕒 ${mess.openTime || ""} - ${mess.closeTime || ""}</p>
+
+<p>${mess.menu || "Menu Not Added"}</p>
+
+<a href="${mess.mapLink || '#'}"
+target="_blank"
+class="btn">
+📍 Location
+</a>
+
+<a href="${mess.whatsappLink || '#'}"
+target="_blank"
+class="btn">
+💬 WhatsApp
+</a>
+
+</div>
+
+`;
+
+});
 
 }
 </script>

@@ -115,8 +115,19 @@ h2{
 
     <input type="text" id="messType" placeholder="Veg / Non-Veg">
 
-    <button onclick="addMess()">➕ Add Mess</button>
+<input type="email" id="ownerEmail" placeholder="Owner Email">
 
+<input type="password" id="ownerPassword" placeholder="Owner Password">
+
+<input type="text" id="openTime" placeholder="Opening Time">
+
+<input type="text" id="closeTime" placeholder="Closing Time">
+
+<button onclick="addMess()" id="addBtn">➕ Add Mess</button>
+
+<button onclick="updateMess()" id="updateBtn" style="display:none;">
+✏️ Update Mess
+</button>
 </div>
 
 <div class="cards">
@@ -154,6 +165,7 @@ if(localStorage.getItem("adminLoggedIn") !== "true"){
 
 let messes =
 JSON.parse(localStorage.getItem("messes")) || [];
+let editIndex = -1;
 
 function saveData(){
     localStorage.setItem(
@@ -182,11 +194,19 @@ function addMess(){
     }
 
     messes.push({
-        name:name,
-        location:location,
-        price:price,
-        type:type
-    });
+    name:name,
+    location:location,
+    price:price,
+    type:type,
+    ownerEmail:
+    document.getElementById("ownerEmail").value,
+    ownerPassword:
+    document.getElementById("ownerPassword").value,
+    openTime:
+    document.getElementById("openTime").value,
+    closeTime:
+    document.getElementById("closeTime").value
+});
 
     saveData();
     showMesses();
@@ -195,6 +215,10 @@ function addMess(){
     document.getElementById("messLocation").value="";
     document.getElementById("messPrice").value="";
     document.getElementById("messType").value="";
+    document.getElementById("ownerEmail").value="";
+document.getElementById("ownerPassword").value="";
+document.getElementById("openTime").value="";
+document.getElementById("closeTime").value="";
 }
 
 function deleteMess(index){
@@ -208,7 +232,77 @@ function deleteMess(index){
         showMesses();
     }
 }
+function editMess(index){
+ alert("Edit button clicked");
 
+    editIndex = index;
+    console.log(messes[index]);
+
+    document.getElementById("messName").value =
+    messes[index].name;
+
+    document.getElementById("messLocation").value =
+    messes[index].location;
+
+    document.getElementById("messPrice").value =
+    messes[index].price;
+
+    document.getElementById("messType").value =
+    messes[index].type;
+
+    document.getElementById("ownerEmail").value =
+    messes[index].ownerEmail || "";
+
+    document.getElementById("ownerPassword").value =
+    messes[index].ownerPassword || "";
+
+    document.getElementById("openTime").value =
+    messes[index].openTime || "";
+
+    document.getElementById("closeTime").value =
+    messes[index].closeTime || "";
+
+    document.getElementById("addBtn").style.display =
+    "none";
+
+    document.getElementById("updateBtn").style.display =
+    "inline-block";
+}
+
+function updateMess(){
+
+    if(editIndex === -1) return;
+
+    messes[editIndex].name =
+    document.getElementById("messName").value;
+
+    messes[editIndex].location =
+    document.getElementById("messLocation").value;
+
+    messes[editIndex].price =
+    document.getElementById("messPrice").value;
+
+    messes[editIndex].type =
+    document.getElementById("messType").value;
+
+    messes[editIndex].ownerEmail =
+    document.getElementById("ownerEmail").value;
+
+    messes[editIndex].ownerPassword =
+    document.getElementById("ownerPassword").value;
+
+    messes[editIndex].openTime =
+    document.getElementById("openTime").value;
+
+    messes[editIndex].closeTime =
+    document.getElementById("closeTime").value;
+
+    saveData();
+
+    alert("Mess Updated Successfully");
+
+    location.reload();
+}
 function showMesses(){
 
     let html="";
@@ -216,12 +310,12 @@ function showMesses(){
     let total = messes.length;
 
     let veg = messes.filter(
-        mess => mess.type.toLowerCase().includes("veg")
-    ).length;
+    mess => mess.type.toLowerCase() === "veg"
+).length;
 
-    let nonVeg = messes.filter(
-        mess => mess.type.toLowerCase().includes("non")
-    ).length;
+let nonVeg = messes.filter(
+    mess => mess.type.toLowerCase() === "non-veg"
+).length;
 
     document.getElementById("total").innerText = total;
     document.getElementById("vegCount").innerText = veg;
@@ -230,22 +324,34 @@ function showMesses(){
     messes.forEach((mess,index)=>{
 
         html += `
-        <div class="mess-card">
+<div class="mess-card">
 
-            <h3>${mess.name}</h3>
+    <h3>${mess.name}</h3>
 
-            <p><b>Location:</b> ${mess.location}</p>
+    <p><b>Location:</b> ${mess.location}</p>
 
-            <p><b>Price:</b> ${mess.price}</p>
+    <p><b>Price:</b> ${mess.price}</p>
 
-            <p><b>Type:</b> ${mess.type}</p>
+    <p><b>Type:</b> ${mess.type}</p>
 
-            <button onclick="deleteMess(${index})">
-                ❌ Delete
-            </button>
+    <p><b>Opening:</b> ${mess.openTime || "-"}</p>
 
-        </div>
-        `;
+    <p><b>Closing:</b> ${mess.closeTime || "-"}</p>
+
+    <p><b>Owner Email:</b> ${mess.ownerEmail || "-"}</p>
+
+    <button onclick="editMess(${index})">
+        ✏️ Edit
+    </button>
+     <button onclick="updateMess()" id="updateBtn" style="display:none;">
+    ✏️ Update Mess
+     </button>
+    <button onclick="deleteMess(${index})">
+        ❌ Delete
+    </button>
+
+</div>
+`;
     });
 
     document.getElementById("messList").innerHTML = html;
